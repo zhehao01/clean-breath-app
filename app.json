@@ -1,0 +1,10 @@
+{
+  "expo": {
+    "scheme": "acme",
+    "web": {
+      "bundler": "metro"
+    },
+    "name": "clean-breath-app",
+    "slug": "clean-breath-app"
+  }
+}
