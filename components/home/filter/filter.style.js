@@ -6,27 +6,16 @@ const styles = StyleSheet.create({
   container: {
     width: "100%",
   },
-  userName: {
-    fontFamily: FONT.regular,
-    fontSize: SIZES.large,
-    color: COLORS.secondary,
-  },
-  welcomeMessage: {
-    fontFamily: FONT.bold,
-    fontSize: SIZES.xLarge,
-    color: COLORS.primary,
-    marginTop: 2,
-  },
   searchContainer: {
     justifyContent: "center",
     alignItems: "center",
     flexDirection: "row",
-    marginTop: SIZES.large,
+    marginTop: 0,
     height: 50,
   },
   searchWrapper: {
     flex: 1,
-    backgroundColor: COLORS.white,
+    backgroundColor: COLORS.gray3,
     marginRight: SIZES.small,
     justifyContent: "center",
     alignItems: "center",
@@ -54,7 +43,7 @@ const styles = StyleSheet.create({
   },
   tabsContainer: {
     width: "100%",
-    marginTop: SIZES.medium,
+    marginTop: SIZES.xSmall,
   },
   tab: (activeJobType, item) => ({
     paddingVertical: SIZES.small / 2,

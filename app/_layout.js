@@ -21,7 +21,11 @@ const Layout = () => {
     return null;
   }
 
-  return <Stack onLayout={onLayoutRootView} />;
+  return (
+    <Stack onLayout={onLayoutRootView} screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="(tabs)" />
+    </Stack>
+  );
 };
 
 export default Layout;

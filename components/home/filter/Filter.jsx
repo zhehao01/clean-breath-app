@@ -9,24 +9,19 @@ import {
 } from "react-native";
 import { useRouter } from "expo-router";
 
-import styles from "./welcome.style";
+import styles from "./filter.style";
 import { COLORS, icons, SIZES } from "../../../constants";
 
-const jobTypes = ["Full-Time", "Part-Time", "Contractor"];
+const jobTypes = ["AQI", "PM2.5", "PM10", "O3", "NO2", "SO2", "CO"];
 
-const Welcome = () => {
+const Filter = () => {
   const router = useRouter();
 
   const [activeJobType, setActiveJobType] = useState("Full-Time");
 
   return (
     <View>
-      <View style={styles.container}>
-        <Text style={styles.userName}>Hello Zhehao</Text>
-        <Text style={styles.welcomeMessage}>Find your perfect job</Text>
-      </View>
-
-      <View style={styles.searchContainer}>
+      {/*<View style={styles.searchContainer}>
         <View style={styles.searchWrapper}>
           <TextInput
             style={styles.searchInput}
@@ -44,7 +39,7 @@ const Welcome = () => {
             style={styles.searchBtnImage}
           />
         </TouchableOpacity>
-      </View>
+  </View>*/}
 
       <View style={styles.tabsContainer}>
         <FlatList
@@ -69,4 +64,4 @@ const Welcome = () => {
   );
 };
 
-export default Welcome;
+export default Filter;
