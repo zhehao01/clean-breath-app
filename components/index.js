@@ -1,4 +1,5 @@
 import ScreenHeaderBtn from "./common/header/ScreenHeaderBtn";
+import TabBarBtn from "./common/tabBar/TabBarBtn";
 
 // home screen
 import Filter from "./home/filter/Filter";
@@ -18,6 +19,7 @@ import NearbyJobCard from "./common/cards/nearby/NearbyJobCard";
 
 export {
   ScreenHeaderBtn,
+  TabBarBtn,
   Filter,
   Nearbyjobs,
   Popularjobs,

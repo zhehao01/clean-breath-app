@@ -3,6 +3,8 @@ const COLORS = {
   secondary: "#444262",
   tertiary: "#FF7754",
 
+  green: "#0FA958",
+
   gray: "#83829A",
   gray2: "#C1C0C8",
   gray3: "#EFEFF1",

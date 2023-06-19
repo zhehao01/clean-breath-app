@@ -17,7 +17,7 @@ const jobTypes = ["AQI", "PM2.5", "PM10", "O3", "NO2", "SO2", "CO"];
 const Filter = () => {
   const router = useRouter();
 
-  const [activeJobType, setActiveJobType] = useState("Full-Time");
+  const [activeJobType, setActiveJobType] = useState("AQI");
 
   return (
     <View>
