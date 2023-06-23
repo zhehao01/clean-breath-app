@@ -16,7 +16,7 @@ const TabsLayout = () => {
               focused={focused}
               iconUrl={icons.home}
               filled_iconUrl={icons.home_filled}
-              dimension="60%"
+              dimension={25}
             />
           ),
         }}
@@ -26,14 +26,11 @@ const TabsLayout = () => {
         options={{
           tabBarLabel: "",
           tabBarIcon: ({ focused }) => (
-            <Image
-              source={focused ? icons.location_filled : icons.location}
-              resizeMode="cover"
-              style={{
-                marginTop: 20,
-                width: 25,
-                height: 25,
-              }}
+            <TabBarBtn
+              focused={focused}
+              iconUrl={icons.location}
+              filled_iconUrl={icons.location_filled}
+              dimension={25}
             />
           ),
         }}

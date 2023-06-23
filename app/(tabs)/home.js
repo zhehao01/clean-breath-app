@@ -31,14 +31,10 @@ const home = () => {
           headerTitle: "Clean Breath",
         }}
       />
-      <ScrollView showsVerticalScrollIndicator={false}>
-        <View style={{ flex: 1, padding: SIZES.medium }}>
-          <Filter />
-          <Popularjobs />
-          <Nearbyjobs />
-          <SavedLocations />
-        </View>
-      </ScrollView>
+      <View style={{ flex: 1, padding: SIZES.medium }}>
+        <Filter />
+        <SavedLocations />
+      </View>
     </SafeAreaView>
   );
 };

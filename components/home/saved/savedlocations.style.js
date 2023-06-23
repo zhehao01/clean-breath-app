@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
   },
   cardsContainer: {
     marginTop: SIZES.medium,
-    gap: SIZES.small,
+    backgroundColor: COLORS.gray,
   },
 });
 
