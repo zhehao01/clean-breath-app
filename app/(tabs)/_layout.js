@@ -28,8 +28,8 @@ const TabsLayout = () => {
           tabBarIcon: ({ focused }) => (
             <TabBarBtn
               focused={focused}
-              iconUrl={icons.location}
-              filled_iconUrl={icons.location_filled}
+              iconUrl={icons.settings}
+              filled_iconUrl={icons.settings_filled}
               dimension={25}
             />
           ),

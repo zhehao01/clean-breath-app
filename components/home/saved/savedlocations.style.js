@@ -23,8 +23,7 @@ const styles = StyleSheet.create({
     color: COLORS.gray,
   },
   cardsContainer: {
-    marginTop: SIZES.medium,
-    backgroundColor: COLORS.gray,
+    marginTop: SIZES.small,
   },
 });
 

@@ -3,12 +3,25 @@ import { StyleSheet } from "react-native";
 import { COLORS, FONT, SHADOWS, SIZES } from "../../../../constants";
 
 const styles = StyleSheet.create({
-  container: (selectedJob, item) => ({
-    width: 250,
-    padding: SIZES.xLarge,
-    backgroundColor: selectedJob === item.job_id ? COLORS.primary : "#FFF",
+  container: (aqi) => ({
+    flexDirection: "row",
+    width: "100%",
+    padding: SIZES.medium,
+    backgroundColor:
+      aqi <= 50
+        ? COLORS.good
+        : aqi <= 100
+        ? COLORS.moderate
+        : aqi <= 150
+        ? COLORS.unhealthySensitive
+        : aqi <= 200
+        ? COLORS.unhealthy
+        : aqi <= 300
+        ? COLORS.veryUnhealthy
+        : COLORS.hazardous,
     borderRadius: SIZES.medium,
     justifyContent: "space-between",
+    alignItems: "center",
     ...SHADOWS.medium,
     shadowColor: COLORS.white,
   }),

@@ -12,6 +12,8 @@ import chevronRight from "../assets/icons/chevron-right.png";
 import add from "../assets/icons/add.png";
 import home from "../assets/icons/home.png";
 import home_filled from "../assets/icons/home-filled.png";
+import settings from "../assets/icons/settings.png";
+import settings_filled from "../assets/icons/settings-filled.png";
 
 export default {
   heart,
@@ -28,4 +30,6 @@ export default {
   add,
   home,
   home_filled,
+  settings,
+  settings_filled,
 };

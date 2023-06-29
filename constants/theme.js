@@ -3,14 +3,19 @@ const COLORS = {
   secondary: "#444262",
   tertiary: "#FF7754",
 
-  green: "#0FA958",
-
   gray: "#83829A",
   gray2: "#C1C0C8",
   gray3: "#EFEFF1",
 
   white: "#FFFFFF",
   lightWhite: "#FAFAFC",
+
+  good: "#B0D2A0",
+  moderate: "#F9E79F",
+  unhealthySensitive: "#F5B7B1",
+  unhealthy: "#EC7063",
+  veryUnhealthy: "#A569BD",
+  hazardous: "#8f616e",
 };
 
 const FONT = {
