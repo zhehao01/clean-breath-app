@@ -3,24 +3,18 @@ import { View, Text, ScrollView, SafeAreaView, StatusBar } from "react-native";
 import { Stack, useRouter } from "expo-router";
 
 import { COLORS, icons, images, SIZES } from "../../constants";
-import {
-  Nearbyjobs,
-  Popularjobs,
-  ScreenHeaderBtn,
-  Filter,
-  SavedLocations,
-} from "../../components";
+import { ScreenHeaderBtn, Filter, SavedLocations } from "../../components";
 import styles from "../../components/common/header/screenheader.style";
 
 const home = () => {
   const router = useRouter();
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.lightWhite }}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.white }}>
       <StatusBar barStyle="dark-content" />
       <Stack.Screen
         options={{
-          headerstyle: { backgroundColor: COLORS.white },
+          headerStyle: { backgroundColor: COLORS.white },
           headerShadowVisible: false,
           headerLeft: () => (
             <ScreenHeaderBtn iconUrl={icons.menu} dimension="60%" />
@@ -31,10 +25,19 @@ const home = () => {
           headerTitle: "Clean Breath",
         }}
       />
-      <View style={{ flex: 1, padding: SIZES.medium }}>
+      <View
+        style={{
+          paddingHorizontal: SIZES.medium,
+          paddingBottom: SIZES.xSmall,
+        }}
+      >
         <Filter />
-        <SavedLocations />
       </View>
+      <ScrollView indicatorStyle="black" scrollIndicatorInsets={{ right: 2 }}>
+        <View style={{ flex: 1, padding: SIZES.medium }}>
+          <SavedLocations />
+        </View>
+      </ScrollView>
     </SafeAreaView>
   );
 };

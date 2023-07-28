@@ -25,47 +25,43 @@ const styles = StyleSheet.create({
     ...SHADOWS.medium,
     shadowColor: COLORS.white,
   }),
-  logoContainer: (selectedJob, item) => ({
-    width: 50,
-    height: 50,
-    backgroundColor: selectedJob === item.job_id ? "#FFF" : COLORS.white,
-    borderRadius: SIZES.medium,
+
+  infoContainer: {
+    backgroundColor: COLORS.white,
+    borderRadius: 50,
+    width: 60,
+    height: 60,
     justifyContent: "center",
     alignItems: "center",
-  }),
-  logoImage: {
-    width: "70%",
-    height: "70%",
   },
-  companyName: {
-    fontSize: SIZES.medium,
-    fontFamily: FONT.regular,
-    color: "#B3AEC6",
-    marginTop: SIZES.small / 1.5,
-  },
-  infoContainer: {
-    marginTop: SIZES.large,
-  },
-  jobName: (selectedJob, item) => ({
-    fontSize: SIZES.large,
-    fontFamily: FONT.medium,
-    color: selectedJob === item.job_id ? COLORS.white : COLORS.primary,
-  }),
-  infoWrapper: {
-    flexDirection: "row",
-    marginTop: 5,
-    justifyContent: "flex-start",
-    alignItems: "center",
-  },
-  publisher: (selectedJob) => ({
-    fontSize: SIZES.medium - 2,
+
+  infoText: (aqi) => ({
+    color:
+      aqi < 50
+        ? "#00E400"
+        : aqi < 100
+        ? "#ffb55d"
+        : aqi < 150
+        ? "#FF7E00"
+        : aqi < 200
+        ? "#FF0000"
+        : aqi < 300
+        ? "#8F3F97"
+        : "#7E0023",
     fontFamily: FONT.bold,
-    color: selectedJob === item.job_id ? COLORS.white : COLORS.primary,
+    fontSize: SIZES.large,
   }),
-  location: {
-    fontSize: SIZES.medium - 2,
+
+  locationText: {
+    fontFamily: FONT.bold,
+    fontSize: SIZES.xLarge,
+    color: COLORS.black,
+  },
+
+  cityText: {
     fontFamily: FONT.regular,
-    color: "#B3AEC6",
+    fontSize: SIZES.medium,
+    color: COLORS.black,
   },
 });
 

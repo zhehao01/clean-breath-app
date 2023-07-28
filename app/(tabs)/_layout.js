@@ -22,7 +22,7 @@ const TabsLayout = () => {
         }}
       />
       <Tabs.Screen
-        name="map"
+        name="settings"
         options={{
           tabBarLabel: "",
           tabBarIcon: ({ focused }) => (

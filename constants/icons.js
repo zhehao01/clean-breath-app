@@ -14,6 +14,12 @@ import home from "../assets/icons/home.png";
 import home_filled from "../assets/icons/home-filled.png";
 import settings from "../assets/icons/settings.png";
 import settings_filled from "../assets/icons/settings-filled.png";
+import mask from "../assets/icons/mask.png";
+import no_mask from "../assets/icons/no-mask.png";
+import window from "../assets/icons/window.png";
+import no_window from "../assets/icons/no-window.png";
+import play from "../assets/icons/play.png";
+import no_play from "../assets/icons/no-play.png";
 
 export default {
   heart,
@@ -32,4 +38,10 @@ export default {
   home_filled,
   settings,
   settings_filled,
+  mask,
+  no_mask,
+  window,
+  no_window,
+  play,
+  no_play,
 };

@@ -2,59 +2,18 @@ import { View, Text, Image, TouchableOpacity } from "react-native";
 
 import styles from "./savedlocationcard.style";
 
-const SavedLocationCard = ({ item, handleCardPress }) => {
+const SavedLocationCard = ({ item, handleNavigate }) => {
   return (
     <TouchableOpacity
       style={styles.container(item.aqi)}
-      onPress={handleCardPress}
+      onPress={handleNavigate}
     >
       <View>
-        <Text
-          style={{
-            fontWeight: "bold",
-            fontSize: 20,
-          }}
-        >
-          {item.location}
-        </Text>
-        <Text
-          style={{
-            fontSize: 15,
-          }}
-        >
-          {item.city}
-        </Text>
+        <Text style={styles.locationText}>{item.location}</Text>
+        <Text style={styles.cityText}>{item.city}</Text>
       </View>
-      <View
-        style={{
-          backgroundColor: "#FFF",
-          borderRadius: 50,
-          width: 60,
-          height: 60,
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        <Text
-          style={{
-            color:
-              item.aqi < 50
-                ? "#00E400"
-                : item.aqi < 100
-                ? "#ffb55d"
-                : item.aqi < 150
-                ? "#FF7E00"
-                : item.aqi < 200
-                ? "#FF0000"
-                : item.aqi < 300
-                ? "#8F3F97"
-                : "#7E0023",
-            fontWeight: "bold",
-            fontSize: 20,
-          }}
-        >
-          {item.aqi}
-        </Text>
+      <View style={styles.infoContainer}>
+        <Text style={styles.infoText(item.aqi)}>{item.aqi}</Text>
       </View>
     </TouchableOpacity>
   );
