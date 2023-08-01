@@ -25,14 +25,14 @@ const home = () => {
           headerTitle: "Clean Breath",
         }}
       />
-      <View
+      {/*<View
         style={{
           paddingHorizontal: SIZES.medium,
           paddingBottom: SIZES.xSmall,
         }}
       >
         <Filter />
-      </View>
+      </View>*/}
       <ScrollView indicatorStyle="black" scrollIndicatorInsets={{ right: 2 }}>
         <View style={{ flex: 1, padding: SIZES.medium }}>
           <SavedLocations />

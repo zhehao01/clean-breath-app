@@ -88,45 +88,6 @@ const SavedLocations = () => {
         { name: "CO", value: 60 },
       ],
     },
-    {
-      location: "Barcelona",
-      city: "Catalunya, Spain",
-      aqi: "151",
-      pollutants: [
-        { name: "PM2.5", value: 10 },
-        { name: "PM10", value: 20 },
-        { name: "O3", value: 30 },
-        { name: "NO2", value: 40 },
-        { name: "SO2", value: 50 },
-        { name: "CO", value: 60 },
-      ],
-    },
-    {
-      location: "Barcelona",
-      city: "Catalunya, Spain",
-      aqi: "201",
-      pollutants: [
-        { name: "PM2.5", value: 10 },
-        { name: "PM10", value: 20 },
-        { name: "O3", value: 30 },
-        { name: "NO2", value: 40 },
-        { name: "SO2", value: 50 },
-        { name: "CO", value: 60 },
-      ],
-    },
-    {
-      location: "Barcelona",
-      city: "Catalunya, Spain",
-      aqi: "301",
-      pollutants: [
-        { name: "PM2.5", value: 10 },
-        { name: "PM10", value: 20 },
-        { name: "O3", value: 30 },
-        { name: "NO2", value: 40 },
-        { name: "SO2", value: 50 },
-        { name: "CO", value: 60 },
-      ],
-    },
   ];
 
   return (
@@ -138,6 +99,7 @@ const SavedLocations = () => {
       ) : (
         data?.map((location) => (
           <SavedLocationCard
+            key={location.aqi}
             item={location}
             handleNavigate={() => {
               console.log(location.aqi);
