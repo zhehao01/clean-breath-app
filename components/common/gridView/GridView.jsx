@@ -8,13 +8,17 @@ const GridView = (props) => {
 
   return (
     <View style={styles.container}>
-      {data.map((item, index) => {
-        return (
-          <View key={index} style={styles.cell(col)}>
-            {renderItem(item)}
-          </View>
-        );
-      })}
+      {data === undefined ? (
+        <View></View>
+      ) : (
+        data?.map((item, index) => {
+          return (
+            <View key={index} style={styles.cell(col)}>
+              {renderItem(item)}
+            </View>
+          );
+        })
+      )}
     </View>
   );
 };

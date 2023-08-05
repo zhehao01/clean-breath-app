@@ -11,6 +11,9 @@
         "projectId": "2d1c3eb1-e1e4-4035-a605-d3659f7d4557"
       }
     },
-    "owner": "zhehao01"
+    "owner": "zhehao01",
+    "android": {
+      "package": "com.zhehao01.cleanbreathapp"
+    }
   }
 }

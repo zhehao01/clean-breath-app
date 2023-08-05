@@ -11,7 +11,7 @@ const Pollutants = ({ pollutants }) => {
         <Text style={styles.headText}>Contaminantes</Text>
       </View>
       <GridView
-        data={JSON.parse(pollutants)}
+        data={pollutants}
         renderItem={(item) => (
           <View style={styles.itemContainer}>
             <Text style={styles.pollutantText}>{item.name}</Text>

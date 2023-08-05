@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Redirect } from "expo-router";
 import * as Notifications from "expo-notifications";
 import * as Device from "expo-device";
@@ -7,8 +7,8 @@ import Constants from "expo-constants";
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
     shouldShowAlert: true,
-    shouldPlaySound: false,
-    shouldSetBadge: false,
+    shouldPlaySound: true,
+    shouldSetBadge: true,
   }),
 });
 
@@ -46,11 +46,27 @@ const registerForPushNotificationsAsync = async () => {
   return token;
 };
 
-export default class Start extends React.Component {
-  componentDidMount() {
+export default function App() {
+  const [notification, setNotification] = useState(false);
+  const notificationListener = useRef();
+  const responseListener = useRef();
+
+  useEffect(() => {
     registerForPushNotificationsAsync();
-  }
-  render() {
-    return <Redirect href={"/home"} />;
-  }
+
+    notificationListener.current =
+      Notifications.addNotificationReceivedListener((notification) => {
+        setNotification(notification);
+      });
+
+    responseListener.current =
+      Notifications.addNotificationResponseReceivedListener((response) => {});
+
+    return () => {
+      Notifications.removeNotificationSubscription(notificationListener);
+      Notifications.removeNotificationSubscription(responseListener);
+    };
+  }, []);
+
+  return <Redirect href={"/home"} />;
 }

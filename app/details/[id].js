@@ -1,3 +1,4 @@
+import { useCallback, useState, useEffect } from "react";
 import {
   View,
   Text,
@@ -13,7 +14,6 @@ import {
   useRouter,
   useSearchParams,
 } from "expo-router";
-import { useCallback, useState } from "react";
 
 import { COLORS, icons, SIZES } from "../../constants";
 import {
@@ -22,15 +22,30 @@ import {
   Pollutants,
   Recommendations,
 } from "../../components";
+import useFetch from "../../hook/useFetch";
+import { convertToGlobalSchema } from "../../hook/dataExtractor";
 
 const Details = ({}) => {
   const params = useLocalSearchParams();
   const router = useRouter();
 
+  const [info, setInfo] = useState({});
   const [refreshing, setRefreshing] = useState(false);
-  const isLoading = false;
-  const data = [];
-  const error = false;
+
+  const { data, isLoading, error, refetch } = useFetch(params.city);
+
+  useEffect(() => {
+    function getData() {
+      let converted;
+      if (data.length != 0 && !isLoading && !error) {
+        converted = convertToGlobalSchema(data);
+        setInfo(converted);
+      } else if (isLoading) {
+        refetch();
+      }
+    }
+    getData();
+  }, [data]);
 
   const onRefresh = () => {};
 
@@ -48,7 +63,7 @@ const Details = ({}) => {
               iconUrl={icons.chevronLeft}
               dimension="60%"
               handlePress={() => {
-                console.log(params.pollutants);
+                console.log(info.pollutants);
               }}
             />
           ),
@@ -61,18 +76,16 @@ const Details = ({}) => {
           }
         >
           {isLoading ? (
-            <ActivityIndicator size="large" color={COLORS.primary} />
+            <ActivityIndicator size="large" color={COLORS.gray} />
           ) : error ? (
-            <Text>Something went wrong</Text>
+            <Text>
+              {"Error inesperado. Por favor, intenta de nuevo más tarde."}
+            </Text>
           ) : false ? (
             <Text>No data found</Text>
           ) : (
             <View style={{ padding: SIZES.medium, paddingBottom: 100 }}>
-              <Main
-                location={params.location}
-                city={params.city}
-                aqi={params.aqi}
-              />
+              <Main location={info.location} city={info.city} aqi={info.aqi} />
               <View
                 style={{
                   marginVertical: SIZES.xxLarge + 6,
@@ -82,7 +95,7 @@ const Details = ({}) => {
                   borderBottomColor: COLORS.white,
                 }}
               />
-              <Recommendations aqi={params.aqi} />
+              <Recommendations aqi={info.aqi} />
               <View
                 style={{
                   marginVertical: SIZES.xxLarge + 6,
@@ -92,7 +105,7 @@ const Details = ({}) => {
                   borderBottomColor: COLORS.white,
                 }}
               />
-              <Pollutants pollutants={params.pollutants} />
+              <Pollutants pollutants={info.pollutants} />
             </View>
           )}
         </ScrollView>

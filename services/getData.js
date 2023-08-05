@@ -1,16 +1,13 @@
-import { useFetch } from "../hook/useFetch";
+import useFetch from "../hook/useFetch";
 import { convertToGlobalSchema } from "../hook/dataExtractor";
 
-const getData = async (cities) => {
-  const data = [];
-  cities.forEach((city) => {
-    useFetch(city).then((data) => {
-      convertToGlobalSchema(data).then((filteredData) => {
-        data.push(filteredData);
-      });
-    });
+const getData = (cities) => {
+  const res = [];
+  cities.forEach(async (city) => {
+    const { data, isLoading, error, refetch } = useFetch(city);
   });
-  return data;
+
+  return res;
 };
 
 export default getData;

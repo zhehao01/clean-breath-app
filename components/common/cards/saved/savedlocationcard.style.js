@@ -22,9 +22,23 @@ const styles = StyleSheet.create({
     borderRadius: SIZES.medium,
     justifyContent: "space-between",
     alignItems: "center",
-    ...SHADOWS.medium,
-    shadowColor: COLORS.white,
   }),
+
+  errorContainer: {
+    flexDirection: "row",
+    width: "100%",
+    padding: SIZES.medium,
+    backgroundColor: COLORS.gray3,
+    borderRadius: SIZES.medium,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+
+  errorText: {
+    fontFamily: FONT.medium,
+    fontSize: SIZES.medium,
+    color: COLORS.black,
+  },
 
   infoContainer: {
     backgroundColor: COLORS.white,
