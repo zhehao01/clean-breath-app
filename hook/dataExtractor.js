@@ -40,14 +40,3 @@ export function convertToGlobalSchema(data) {
 
   return global;
 }
-
-/*
-global.pollutants.pm25 =
-    data.iaqi.pm25 === undefined ? "-" : data.iaqi.pm25.v;
-  global.pollutants.pm10 =
-    data.iaqi.pm10 === undefined ? "-" : data.iaqi.pm10.v;
-  global.pollutants.o3 = data.iaqi.o3 === undefined ? "-" : data.iaqi.o3.v;
-  global.pollutants.no2 = data.iaqi.no2 === undefined ? "-" : data.iaqi.no2.v;
-  global.pollutants.so2 = data.iaqi.so2 === undefined ? "-" : data.iaqi.so2.v;
-  global.pollutants.co = data.iaqi.co === undefined ? "-" : data.iaqi.co.v;
-  */

@@ -9,7 +9,7 @@ const ScreenHeaderBtn = ({ iconUrl, dimension, handlePress }) => {
       <Image
         source={iconUrl}
         resizemode="cover"
-        style={styles.btnImg(dimension)}
+        style={[styles.btnImg(dimension), { tintColor: "black" }]}
       />
     </TouchableOpacity>
   );

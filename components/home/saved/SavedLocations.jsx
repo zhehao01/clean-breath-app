@@ -2,7 +2,6 @@ import { View, Text, ActivityIndicator } from "react-native";
 import { useRouter } from "expo-router";
 
 import styles from "./savedlocations.style";
-import { COLORS } from "../../../constants";
 import SavedLocationCard from "../../common/cards/saved/SavedLocationCard";
 
 const SavedLocations = ({ cityIDs }) => {

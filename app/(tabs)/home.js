@@ -18,9 +18,10 @@ const home = () => {
         data: { data: "goes here" },
       },
       trigger: {
-        hour: 9,
+        seconds: 2,
+        /*hour: 9,
         minute: 0,
-        repeats: true,
+        repeats: true,*/
       },
     });
   };
@@ -36,13 +37,19 @@ const home = () => {
           headerStyle: { backgroundColor: COLORS.white },
           headerShadowVisible: false,
           headerLeft: () => (
-            <ScreenHeaderBtn iconUrl={icons.menu} dimension="60%" />
+            <ScreenHeaderBtn
+              iconUrl={icons.menu}
+              dimension="60%"
+              handlePress={() => sendN()}
+            />
           ),
           headerRight: () => (
             <ScreenHeaderBtn
               iconUrl={icons.add}
               dimension="90%"
-              handlePress={() => sendN()}
+              handlePress={() => {
+                router.push("/search");
+              }}
             />
           ),
           headerTitle: "Clean Breath",

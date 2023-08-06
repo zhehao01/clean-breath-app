@@ -6,14 +6,8 @@ import {
   ScrollView,
   ActivityIndicator,
   RefreshControl,
-  StatusBar,
 } from "react-native";
-import {
-  Stack,
-  useLocalSearchParams,
-  useRouter,
-  useSearchParams,
-} from "expo-router";
+import { Stack, useLocalSearchParams, useRouter } from "expo-router";
 
 import { COLORS, icons, SIZES } from "../../constants";
 import {
@@ -25,7 +19,7 @@ import {
 import useFetch from "../../hook/useFetch";
 import { convertToGlobalSchema } from "../../hook/dataExtractor";
 
-const Details = ({}) => {
+const Details = () => {
   const params = useLocalSearchParams();
   const router = useRouter();
 

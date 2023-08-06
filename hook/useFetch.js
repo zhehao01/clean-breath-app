@@ -23,7 +23,10 @@ const useFetch = (city) => {
     } catch (error) {
       setError(error);
       console.log("ERROR: ", error);
-      Alert.alert("Error", "Ha ocurrido un error. Intente más tarde.");
+      Alert.alert(
+        "Error",
+        "Error inesperado. Por favor, intenta de nuevo más tarde."
+      );
     } finally {
       setIsLoading(false);
     }
