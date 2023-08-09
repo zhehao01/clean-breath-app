@@ -6,6 +6,7 @@ import {
   TextInput,
   ScrollView,
   Text,
+  ActivityIndicator,
 } from "react-native";
 import { useRouter } from "expo-router";
 
@@ -20,12 +21,12 @@ const Search = () => {
   const [keyword, setKeyword] = useState("");
   const [searchResults, setSearchResults] = useState([]);
 
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
-
-  var timer = null;
+  const [searchPressed, setSearchPressed] = useState(false);
 
   const handleSearch = () => {
+    setSearchPressed(true);
     if (keyword.length >= 1) {
       fetchLocations({ keyword: keyword }).then(
         ({ data, isLoading, error }) => {
@@ -47,6 +48,9 @@ const Search = () => {
           placeholderTextColor={COLORS.gray}
           value={keyword}
           onChangeText={(text) => {
+            if (text.length == 0) {
+              setSearchPressed(false);
+            }
             setKeyword(text);
           }}
         />
@@ -57,33 +61,53 @@ const Search = () => {
         />
       </View>
       <View style={styles.searchResultsContainer}>
-        <ScrollView
-          showsVerticalScrollIndicator={false}
-          contentContainerStyle={{
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
-          {searchResults.length > 0 ? (
-            searchResults.map((result, index) => (
-              <TouchableOpacity
-                key={index}
-                style={styles.locationContainer(index)}
-                onPress={() => {
-                  console.log("ID: ", result?.uid);
-                }}
-              >
-                <Text style={styles.locationText}>{result?.station.name}</Text>
-              </TouchableOpacity>
-            ))
-          ) : keyword.length != 0 ? (
-            <View style={styles.errMsgContainer}>
-              <Text style={styles.errMsgText}>
-                No se encontraron resultados.
-              </Text>
-            </View>
-          ) : null}
-        </ScrollView>
+        {isLoading && searchPressed ? (
+          <View style={{ marginTop: 30 }}>
+            <ActivityIndicator size="large" color={COLORS.gray} />
+          </View>
+        ) : error ? (
+          <View style={styles.errMsgContainer}>
+            <Text style={styles.errMsgText}>
+              Error inesperado. Por favor, intenta de nuevo más tarde.
+            </Text>
+          </View>
+        ) : (
+          <ScrollView
+            showsVerticalScrollIndicator={false}
+            contentContainerStyle={{
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            {searchResults.length > 0 ? (
+              searchResults.map((result, index) => (
+                <TouchableOpacity
+                  key={index}
+                  style={styles.locationContainer(index)}
+                  onPress={() => {
+                    console.log("ID: ", result?.uid);
+                    router.push({
+                      pathname: `/details/${result?.uid}`,
+                      params: {
+                        cityId: result?.uid,
+                      },
+                    });
+                  }}
+                >
+                  <Text style={styles.locationText}>
+                    {result?.station.name}
+                  </Text>
+                </TouchableOpacity>
+              ))
+            ) : keyword.length != 0 && searchPressed ? (
+              <View style={styles.errMsgContainer}>
+                <Text style={styles.errMsgText}>
+                  No se encontraron resultados.
+                </Text>
+              </View>
+            ) : null}
+          </ScrollView>
+        )}
       </View>
     </SafeAreaView>
   );

@@ -3,7 +3,7 @@ import menu from "../assets/icons/menu.png";
 import search from "../assets/icons/search.png";
 import filter from "../assets/icons/filter.png";
 import left from "../assets/icons/left.png";
-import heartOutline from "../assets/icons/heart-ol.png";
+import heart_filled from "../assets/icons/heart-filled.png";
 import location from "../assets/icons/location.png";
 import location_filled from "../assets/icons/location-filled.png";
 import chevronLeft from "../assets/icons/chevron-left.png";
@@ -21,11 +21,11 @@ import no_play from "../assets/icons/no-play.png";
 
 export default {
   heart,
+  heart_filled,
   menu,
   search,
   filter,
   left,
-  heartOutline,
   location,
   location_filled,
   chevronLeft,

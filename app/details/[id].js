@@ -24,18 +24,21 @@ const Details = () => {
   const router = useRouter();
 
   const [info, setInfo] = useState({});
-  const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   const [refreshing, setRefreshing] = useState(false);
+  const [isFavorite, setIsFavorite] = useState(false);
 
   useEffect(() => {
     fetchFeed({ cityId: params.cityId }).then(({ data, isLoading, error }) => {
-      setData(data);
       setIsLoading(isLoading);
       setError(error);
       setInfo(convertToGlobalSchema(data));
     });
+    /*
+    if () { setIsFavorite(true); } 
+    else { setIsFavorite(false); }
+    */
   }, []);
 
   const onRefresh = () => {};
@@ -55,6 +58,15 @@ const Details = () => {
               dimension="60%"
               handlePress={() => {
                 console.log(info.pollutants);
+              }}
+            />
+          ),
+          headerRight: () => (
+            <ScreenHeaderBtn
+              iconUrl={isFavorite ? icons.heart_filled : icons.heart}
+              dimension="70%"
+              handlePress={() => {
+                setIsFavorite(!isFavorite);
               }}
             />
           ),

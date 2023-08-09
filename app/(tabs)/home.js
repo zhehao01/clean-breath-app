@@ -26,7 +26,7 @@ const home = () => {
     });
   };
 
-  const cityIDs = ["8387", "6640", "6669", "5725"];
+  const cityIDs = ["here", "@8387", "@6640", "@6669", "@5725"];
   const cities = ["Castellon", "Valencia", "Alicante", "Madrid"];
 
   return (

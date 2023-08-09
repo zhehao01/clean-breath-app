@@ -3,7 +3,7 @@ import axios from "axios";
 import { apiKey } from "../constants";
 
 const feedEndpoint = (params) =>
-  `https://api.waqi.info/feed/@${params.cityId}/?token=${apiKey}`;
+  `https://api.waqi.info/feed/${params.cityId}/?token=${apiKey}`;
 
 const searchEndpoint = (params) =>
   `https://api.waqi.info/v2/search/?token=${apiKey}&keyword=${params.keyword}`;
