@@ -9,16 +9,16 @@ const SavedLocations = ({ cityIDs }) => {
 
   return (
     <View style={styles.cardsContainer}>
-      {cityIDs?.map((cityName, index) => (
+      {cityIDs?.map((id, index) => (
         <SavedLocationCard
           key={index}
-          city={cityName}
+          cityId={id}
           handleNavigate={() => {
-            console.log(cityName);
+            console.log(id);
             router.push({
-              pathname: `/details/${cityName}`,
+              pathname: `/details/${id}`,
               params: {
-                city: cityName,
+                cityId: id,
               },
             });
           }}

@@ -57,8 +57,8 @@ const SHADOWS = {
   small: {
     shadowColor: "#000",
     shadowOffset: {
-      width: 0,
-      height: 2,
+      width: 4,
+      height: 4,
     },
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
@@ -67,8 +67,8 @@ const SHADOWS = {
   medium: {
     shadowColor: "#000",
     shadowOffset: {
-      width: 0,
-      height: 2,
+      width: 4,
+      height: 4,
     },
     shadowOpacity: 0.25,
     shadowRadius: 5.84,

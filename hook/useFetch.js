@@ -1,47 +1,41 @@
-import { useState, useEffect } from "react";
-import { Alert } from "react-native";
 import axios from "axios";
 
-const aqiApiKey = "b07386949217a8169fe2ce72362c82227aedc727";
+import { apiKey } from "../constants";
 
-const useFetch = (city) => {
-  const [data, setData] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
+const feedEndpoint = (params) =>
+  `https://api.waqi.info/feed/@${params.cityId}/?token=${apiKey}`;
+
+const searchEndpoint = (params) =>
+  `https://api.waqi.info/v2/search/?token=${apiKey}&keyword=${params.keyword}`;
+
+const apiCall = async (endpoint) => {
+  var data = [];
+  var isLoading = false;
+  var error = null;
 
   const options = {
     method: "GET",
-    url: `https://api.waqi.info/feed/${city}/?token=${aqiApiKey}`,
+    url: endpoint,
   };
 
-  const fetchData = async () => {
-    setIsLoading(true);
-    try {
-      const response = await axios.request(options);
-      setData(response.data.data);
-      setIsLoading(false);
-    } catch (error) {
-      setError(error);
-      console.log("ERROR: ", error);
-      Alert.alert(
-        "Error",
-        "Error inesperado. Por favor, intenta de nuevo más tarde."
-      );
-    } finally {
-      setIsLoading(false);
-    }
-  };
+  try {
+    isLoading = true;
+    const response = await axios.request(options);
+    data = response.data.data;
+    isLoading = false;
+  } catch (err) {
+    console.log("ERROR: ", err);
+    error = err;
+  } finally {
+    isLoading = false;
+  }
 
-  useEffect(() => {
-    fetchData();
-  }, []);
-
-  const refetch = () => {
-    setIsLoading(true);
-    fetchData();
-  };
-
-  return { data, isLoading, error, refetch };
+  return { data, isLoading, error };
 };
 
-export default useFetch;
+export const fetchLocations = (params) => {
+  return apiCall(searchEndpoint(params));
+};
+export const fetchFeed = (params) => {
+  return apiCall(feedEndpoint(params));
+};

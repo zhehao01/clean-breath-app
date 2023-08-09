@@ -16,7 +16,7 @@ import {
   Pollutants,
   Recommendations,
 } from "../../components";
-import useFetch from "../../hook/useFetch";
+import { fetchFeed } from "../../hook/useFetch";
 import { convertToGlobalSchema } from "../../hook/dataExtractor";
 
 const Details = () => {
@@ -24,22 +24,19 @@ const Details = () => {
   const router = useRouter();
 
   const [info, setInfo] = useState({});
+  const [data, setData] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
   const [refreshing, setRefreshing] = useState(false);
 
-  const { data, isLoading, error, refetch } = useFetch(params.city);
-
   useEffect(() => {
-    function getData() {
-      let converted;
-      if (data.length != 0 && !isLoading && !error) {
-        converted = convertToGlobalSchema(data);
-        setInfo(converted);
-      } else if (isLoading) {
-        refetch();
-      }
-    }
-    getData();
-  }, [data]);
+    fetchFeed({ cityId: params.cityId }).then(({ data, isLoading, error }) => {
+      setData(data);
+      setIsLoading(isLoading);
+      setError(error);
+      setInfo(convertToGlobalSchema(data));
+    });
+  }, []);
 
   const onRefresh = () => {};
 

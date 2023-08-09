@@ -2,27 +2,24 @@ import { useState, useEffect } from "react";
 import { View, Text, ActivityIndicator, TouchableOpacity } from "react-native";
 
 import styles from "./savedlocationcard.style";
-import useFetch from "../../../../hook/useFetch";
+import { fetchFeed } from "../../../../hook/useFetch";
 import { convertToGlobalSchema } from "../../../../hook/dataExtractor";
 import { COLORS } from "../../../../constants";
 
-const SavedLocationCard = ({ city, handleNavigate }) => {
+const SavedLocationCard = ({ cityId, handleNavigate }) => {
   const [info, setInfo] = useState({});
-
-  const { data, isLoading, error, refetch } = useFetch(city);
+  const [data, setData] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    function getData() {
-      let converted;
-      if (data.length != 0 && !isLoading && !error) {
-        converted = convertToGlobalSchema(data);
-        setInfo(converted);
-      } else if (isLoading) {
-        refetch();
-      }
-    }
-    getData();
-  }, [data]);
+    fetchFeed({ cityId: cityId }).then(({ data, isLoading, error }) => {
+      setData(data);
+      setIsLoading(isLoading);
+      setError(error);
+      setInfo(convertToGlobalSchema(data));
+    });
+  }, []);
 
   return (
     <View>

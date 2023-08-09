@@ -65,7 +65,7 @@ const home = () => {
       </View>*/}
       <ScrollView indicatorStyle="black" scrollIndicatorInsets={{ right: 2 }}>
         <View style={{ flex: 1, padding: SIZES.medium }}>
-          <SavedLocations cityIDs={cities} />
+          <SavedLocations cityIDs={cityIDs} />
         </View>
       </ScrollView>
     </SafeAreaView>

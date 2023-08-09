@@ -10,27 +10,27 @@ const Main = ({ location, city, aqi }) => {
   var color3 = "";
 
   const getColor = (aqi) => {
-    if (aqi <= 50) {
+    if (aqi < 50) {
       state = "Buena";
       color = COLORS.good;
       color2 = COLORS.good2;
       color3 = COLORS.good3;
-    } else if (aqi <= 100) {
+    } else if (aqi < 100) {
       state = "Moderada";
       color = COLORS.moderate;
       color2 = COLORS.moderate2;
       color3 = COLORS.moderate3;
-    } else if (aqi <= 150) {
+    } else if (aqi < 150) {
       state = "Dañina a la salud de los grupos sensibles";
       color = COLORS.unhealthySensitive;
       color2 = COLORS.unhealthySensitive2;
       color3 = COLORS.unhealthySensitive3;
-    } else if (aqi <= 200) {
+    } else if (aqi < 200) {
       state = "Dañina a la salud";
       color = COLORS.unhealthy;
       color2 = COLORS.unhealthy2;
       color3 = COLORS.unhealthy3;
-    } else if (aqi <= 300) {
+    } else if (aqi < 300) {
       state = "Muy dañina a la salud";
       color = COLORS.veryUnhealthy;
       color2 = COLORS.veryUnhealthy2;

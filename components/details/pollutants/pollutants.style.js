@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
 
-import { COLORS, FONT, SIZES } from "../../../constants";
+import { COLORS, FONT, SIZES, SHADOWS } from "../../../constants";
 
 const styles = StyleSheet.create({
   itemContainer: {
@@ -14,14 +14,7 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.white,
     borderRadius: SIZES.xSmall - 4,
     marginBottom: SIZES.xSmall,
-    shadowColor: COLORS.black,
-    shadowOffset: {
-      width: 4,
-      height: 4,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 4,
-    elevation: 5,
+    ...SHADOWS.small,
   },
   headContainer: {
     marginBottom: SIZES.small,

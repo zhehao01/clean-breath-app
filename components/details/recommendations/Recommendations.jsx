@@ -16,7 +16,7 @@ const Recommendations = ({ aqi }) => {
   var icon3 = "";
 
   const getColor = (aqi) => {
-    if (aqi <= 50) {
+    if (aqi < 50) {
       recommendation = "¡Disfrute de actividades al aire libre!";
       recommendation2 =
         "Abra las ventanas y deja que pase aire limpio y fresco al interior.";
@@ -29,7 +29,7 @@ const Recommendations = ({ aqi }) => {
       icon = icons.play;
       icon2 = icons.window;
       icon3 = icons.no_mask;
-    } else if (aqi <= 100) {
+    } else if (aqi < 100) {
       recommendation =
         "Los grupos sensibles deben evitar actividades prolongadas al aire libre.";
       recommendation2 =
@@ -44,7 +44,7 @@ const Recommendations = ({ aqi }) => {
       icon = icons.play;
       icon2 = icons.window;
       icon3 = icons.mask;
-    } else if (aqi <= 150) {
+    } else if (aqi < 150) {
       recommendation =
         "Los grupos sensibles deben evitar actividades prolongadas al aire libre.";
       recommendation2 =
@@ -59,7 +59,7 @@ const Recommendations = ({ aqi }) => {
       icon = icons.play;
       icon2 = icons.window;
       icon3 = icons.mask;
-    } else if (aqi <= 200) {
+    } else if (aqi < 200) {
       recommendation = "Evite actividades prolongadas al aire libre.";
       recommendation2 =
         "Mantén las ventanas cerradas y limitar la exposición al aire exterior tanto como sea posible.";
@@ -73,7 +73,7 @@ const Recommendations = ({ aqi }) => {
       icon = icons.no_play;
       icon2 = icons.no_window;
       icon3 = icons.mask;
-    } else if (aqi <= 300) {
+    } else if (aqi < 300) {
       recommendation = "Evite actividades prolongadas al aire libre.";
       recommendation2 =
         "Mantén las ventanas cerradas y limitar la exposición al aire exterior tanto como sea posible.";

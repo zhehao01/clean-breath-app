@@ -8,20 +8,21 @@ const styles = StyleSheet.create({
     width: "100%",
     padding: SIZES.medium,
     backgroundColor:
-      aqi <= 50
+      aqi < 50
         ? COLORS.good
-        : aqi <= 100
+        : aqi < 100
         ? COLORS.moderate
-        : aqi <= 150
+        : aqi < 150
         ? COLORS.unhealthySensitive
-        : aqi <= 200
+        : aqi < 200
         ? COLORS.unhealthy
-        : aqi <= 300
+        : aqi < 300
         ? COLORS.veryUnhealthy
         : COLORS.hazardous,
     borderRadius: SIZES.medium,
     justifyContent: "space-between",
     alignItems: "center",
+    ...SHADOWS.medium,
   }),
 
   errorContainer: {
