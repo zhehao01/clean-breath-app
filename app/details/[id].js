@@ -57,7 +57,7 @@ const Details = () => {
               iconUrl={icons.chevronLeft}
               dimension="60%"
               handlePress={() => {
-                console.log(info.pollutants);
+                router.back();
               }}
             />
           ),

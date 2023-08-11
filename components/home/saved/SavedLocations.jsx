@@ -14,7 +14,6 @@ const SavedLocations = ({ cityIDs }) => {
           key={index}
           cityId={id}
           handleNavigate={() => {
-            console.log(id);
             router.push({
               pathname: `/details/${id}`,
               params: {

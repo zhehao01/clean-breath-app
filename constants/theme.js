@@ -3,6 +3,8 @@ const COLORS = {
   secondary: "#444262",
   tertiary: "#FF7754",
 
+  red: "#FF0000",
+
   gray: "#83829A",
   gray2: "#C1C0C8",
   gray3: "#EFEFF1",
@@ -54,6 +56,17 @@ const SIZES = {
 };
 
 const SHADOWS = {
+  xSmall: {
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+    backgroundColor: COLORS.white,
+  },
   small: {
     shadowColor: "#000",
     shadowOffset: {

@@ -1,11 +1,10 @@
 import { useState } from "react";
-import { View, Text, ScrollView, SafeAreaView, StatusBar } from "react-native";
+import { View, ScrollView, SafeAreaView, StatusBar } from "react-native";
 import { Stack, useRouter } from "expo-router";
 import * as Notifications from "expo-notifications";
 
-import { COLORS, icons, images, SIZES } from "../../constants";
+import { COLORS, icons, SIZES } from "../../constants";
 import { ScreenHeaderBtn, Filter, SavedLocations } from "../../components";
-import styles from "../../components/common/header/screenheader.style";
 
 const home = () => {
   const router = useRouter();
@@ -27,7 +26,6 @@ const home = () => {
   };
 
   const cityIDs = ["here", "@8387", "@6640", "@6669", "@5725"];
-  const cities = ["Castellon", "Valencia", "Alicante", "Madrid"];
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.white }}>

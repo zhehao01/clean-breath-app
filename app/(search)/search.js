@@ -85,11 +85,11 @@ const Search = () => {
                   key={index}
                   style={styles.locationContainer(index)}
                   onPress={() => {
-                    console.log("ID: ", result?.uid);
+                    const cityId = "@" + result?.uid;
                     router.push({
-                      pathname: `/details/${result?.uid}`,
+                      pathname: `/details/${cityId}`,
                       params: {
-                        cityId: result?.uid,
+                        cityId: cityId,
                       },
                     });
                   }}
