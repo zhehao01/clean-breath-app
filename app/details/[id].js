@@ -54,24 +54,40 @@ const Details = () => {
   }, [isFavorite]);
 
   const changeFavorite = async () => {
-    if (isFavorite) {
-      if (params.cityId === "here") {
-        Alert.alert(
-          "Error",
-          "No puedes eliminar la ubicación actual de favoritos",
-          [{ text: "OK" }]
-        );
+    if (!global.isGuest) {
+      if (isFavorite) {
+        if (params.cityId === "here") {
+          Alert.alert(
+            "Error",
+            "No puedes eliminar la ubicación actual de favoritos.",
+            [{ text: "OK" }]
+          );
+        } else {
+          await DeleteFromFavorites(global.username, params.cityId);
+          setIsFavorite(false);
+        }
       } else {
-        await DeleteFromFavorites(global.username, params.cityId);
-        setIsFavorite(false);
+        await AddToFavorites(global.username, params.cityId);
+        setIsFavorite(true);
       }
     } else {
-      await AddToFavorites(global.username, params.cityId);
-      setIsFavorite(true);
+      Alert.alert(
+        "Error",
+        "No puedes agregar favoritos si eres un usuario invitado. Por favor, crea una cuenta o inicia sesión.",
+        [{ text: "OK" }]
+      );
     }
   };
 
-  const onRefresh = () => {};
+  const onRefresh = useCallback(() => {
+    setRefreshing(true);
+    fetchFeed({ cityId: params.cityId }).then(({ data, isLoading, error }) => {
+      setIsLoading(isLoading);
+      setError(error);
+      setInfo(convertToGlobalSchema(data));
+    });
+    setRefreshing(false);
+  });
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.gray3 }}>
@@ -103,7 +119,12 @@ const Details = () => {
       <>
         <ScrollView
           refreshControl={
-            <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+            <RefreshControl
+              tintColor={COLORS.gray2}
+              colors={[COLORS.gray2]}
+              refreshing={refreshing}
+              onRefresh={onRefresh}
+            />
           }
         >
           {isLoading ? (
