@@ -41,7 +41,13 @@ const Search = () => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.headerContainer}>
-        <ScreenHeaderBtn iconUrl={icons.chevronLeft} dimension="60%" />
+        <ScreenHeaderBtn
+          iconUrl={icons.chevronLeft}
+          dimension="60%"
+          handlePress={() => {
+            router.back();
+          }}
+        />
         <TextInput
           style={styles.textInput}
           placeholder="Introduzca el nombre de la ciudad"

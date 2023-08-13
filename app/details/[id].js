@@ -6,6 +6,7 @@ import {
   ScrollView,
   ActivityIndicator,
   RefreshControl,
+  Alert,
 } from "react-native";
 import { Stack, useLocalSearchParams, useRouter } from "expo-router";
 
@@ -18,6 +19,11 @@ import {
 } from "../../components";
 import { fetchFeed } from "../../hook/useFetch";
 import { convertToGlobalSchema } from "../../hook/dataExtractor";
+import {
+  GetCityIDs,
+  AddToFavorites,
+  DeleteFromFavorites,
+} from "../../services/services";
 
 const Details = () => {
   const params = useLocalSearchParams();
@@ -35,11 +41,35 @@ const Details = () => {
       setError(error);
       setInfo(convertToGlobalSchema(data));
     });
-    /*
-    if () { setIsFavorite(true); } 
-    else { setIsFavorite(false); }
-    */
   }, []);
+
+  useEffect(() => {
+    if (!global.isGuest) {
+      GetCityIDs(global.username).then((res) => {
+        if (res.includes(params.cityId)) {
+          setIsFavorite(true);
+        }
+      });
+    }
+  }, [isFavorite]);
+
+  const changeFavorite = async () => {
+    if (isFavorite) {
+      if (params.cityId === "here") {
+        Alert.alert(
+          "Error",
+          "No puedes eliminar la ubicación actual de favoritos",
+          [{ text: "OK" }]
+        );
+      } else {
+        await DeleteFromFavorites(global.username, params.cityId);
+        setIsFavorite(false);
+      }
+    } else {
+      await AddToFavorites(global.username, params.cityId);
+      setIsFavorite(true);
+    }
+  };
 
   const onRefresh = () => {};
 
@@ -56,9 +86,7 @@ const Details = () => {
             <ScreenHeaderBtn
               iconUrl={icons.chevronLeft}
               dimension="60%"
-              handlePress={() => {
-                router.back();
-              }}
+              handlePress={() => router.back()}
             />
           ),
           headerRight: () => (
@@ -66,7 +94,7 @@ const Details = () => {
               iconUrl={isFavorite ? icons.heart_filled : icons.heart}
               dimension="70%"
               handlePress={() => {
-                setIsFavorite(!isFavorite);
+                changeFavorite();
               }}
             />
           ),

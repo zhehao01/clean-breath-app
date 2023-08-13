@@ -1,13 +1,24 @@
-import { useState } from "react";
-import { View, ScrollView, SafeAreaView, StatusBar } from "react-native";
+import { useCallback, useEffect, useState } from "react";
+import {
+  View,
+  ScrollView,
+  SafeAreaView,
+  StatusBar,
+  RefreshControl,
+} from "react-native";
 import { Stack, useRouter } from "expo-router";
 import * as Notifications from "expo-notifications";
 
 import { COLORS, icons, SIZES } from "../../constants";
 import { ScreenHeaderBtn, Filter, SavedLocations } from "../../components";
+import { GetCityIDs } from "../../services/services";
 
 const home = () => {
   const router = useRouter();
+
+  const [refreshing, setRefreshing] = useState(false);
+  const [cityIDs, setCityIDs] = useState(["here"]);
+  const [refreshSaved, setRefreshSaved] = useState(false);
 
   const sendN = async () => {
     await Notifications.scheduleNotificationAsync({
@@ -20,12 +31,30 @@ const home = () => {
         seconds: 2,
         /*hour: 9,
         minute: 0,
-        repeats: true,*/
+        repeats: true,
+        */
       },
     });
   };
 
-  const cityIDs = ["here", "@8387", "@6640", "@6669", "@5725"];
+  useEffect(() => {
+    if (!global.isGuest) {
+      GetCityIDs(global.username).then((res) => {
+        setCityIDs(res);
+      });
+    }
+  }, []);
+
+  const onRefresh = useCallback(() => {
+    setRefreshing(true);
+    if (!global.isGuest) {
+      GetCityIDs(global.username).then((res) => {
+        setCityIDs(res);
+        setRefreshSaved(!refreshSaved);
+      });
+    }
+    setRefreshing(false);
+  }, [refreshSaved]);
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.white }}>
@@ -53,17 +82,20 @@ const home = () => {
           headerTitle: "Clean Breath",
         }}
       />
-      {/*<View
-        style={{
-          paddingHorizontal: SIZES.medium,
-          paddingBottom: SIZES.xSmall,
-        }}
+      <ScrollView
+        indicatorStyle="black"
+        scrollIndicatorInsets={{ right: 2 }}
+        refreshControl={
+          <RefreshControl
+            tintColor={COLORS.gray2}
+            colors={[COLORS.gray2]}
+            refreshing={refreshing}
+            onRefresh={onRefresh}
+          />
+        }
       >
-        <Filter />
-      </View>*/}
-      <ScrollView indicatorStyle="black" scrollIndicatorInsets={{ right: 2 }}>
         <View style={{ flex: 1, padding: SIZES.medium }}>
-          <SavedLocations cityIDs={cityIDs} />
+          <SavedLocations cityIDs={cityIDs} key={refreshSaved} />
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -71,3 +103,14 @@ const home = () => {
 };
 
 export default home;
+
+{
+  /*<View
+        style={{
+          paddingHorizontal: SIZES.medium,
+          paddingBottom: SIZES.xSmall,
+        }}
+      >
+        <Filter />
+      </View>*/
+}

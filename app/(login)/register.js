@@ -6,12 +6,13 @@ import {
   TextInput,
   Text,
   StatusBar,
+  Alert,
 } from "react-native";
 import { useRouter } from "expo-router";
-import axios from "axios";
 
 import styles from "./register.style";
 import { COLORS } from "../../constants";
+import { SignUp } from "../../services/services";
 
 const Register = () => {
   const router = useRouter();
@@ -23,7 +24,7 @@ const Register = () => {
   const [repeatPassword, setRepeatPassword] = useState("");
   const [errMsg, setErrMsg] = useState("");
 
-  const register = async () => {
+  const register = () => {
     if (data.username === "" || data.password === "" || repeatPassword === "") {
       setErrMsg("*Por favor, rellene todos los campos");
       return;
@@ -32,21 +33,20 @@ const Register = () => {
       return;
     } else {
       setErrMsg("");
-      try {
-        const response = await axios.post(
-          "http://192.168.0.18:3000/api/users/register",
-          data
-        );
-        if (response.status === 200) {
-          console.log("Registro correcto");
-          //router.replace("/home");
-        }
-      } catch (error) {
-        if (error.response.status === 422) {
+      SignUp(data).then((response) => {
+        if (response === "OK") {
+          global.username = data.username;
+          global.isGuest = false;
+          router.replace("/home");
+        } else if (response === "KO") {
           setErrMsg("*El usuario introducido no está disponible");
+        } else {
+          Alert.alert(
+            "Error",
+            "Ha ocurrido un error inesperado. Intente de nuevo más tarde."
+          );
         }
-        console.log("\x1b[41m%s\x1b[0m", "ERROR: " + error);
-      }
+      });
     }
   };
 

@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import {
   SafeAreaView,
   TouchableOpacity,
@@ -7,12 +6,13 @@ import {
   TextInput,
   Text,
   StatusBar,
+  Alert,
 } from "react-native";
 import { useRouter } from "expo-router";
-import axios from "axios";
 
 import styles from "./login.style";
 import { COLORS } from "../../constants";
+import { SignIn, SignInGuest, SignUpGuest } from "../../services/services";
 
 const Login = () => {
   const router = useRouter();
@@ -23,53 +23,48 @@ const Login = () => {
   });
   const [errMsg, setErrMsg] = useState("");
 
-  const login = async () => {
+  const login = () => {
     if (fData.username === "" || fData.password === "") {
       setErrMsg("*Por favor, rellene todos los campos");
       return;
     } else {
       setErrMsg("");
-      try {
-        const response = await axios.post(
-          "http://192.168.0.18:3000/api/users/login",
-          fData
-        );
-        if (response.status === 200) {
-          console.log("Login correcto");
-          //router.replace("/home");
-        }
-      } catch (error) {
-        if (error.response.status === 422) {
+      SignIn(fData).then((response) => {
+        if (response === "OK") {
+          global.username = fData.username;
+          global.isGuest = false;
+          router.replace("/home");
+        } else if (response === "KO") {
           setErrMsg("*Usuario o contraseña incorrectos");
+        } else {
+          Alert.alert(
+            "Error",
+            "Ha ocurrido un error inesperado. Intente de nuevo más tarde."
+          );
         }
-        console.log("\x1b[41m%s\x1b[0m", "ERROR: " + error.response.data.error);
-      }
+      });
     }
   };
 
-  const loginAsGuest = async () => {
-    try {
-      const accessToken = await AsyncStorage.getItem("guest-accessToken");
-      if (accessToken) {
-        const response = await axios.post(
-          "http://192.168.0.18:3000/api/users/login-guest",
-          { token: accessToken }
-        );
-        if (response.status === 200) {
-          console.log("Login guest correcto");
-        }
+  const loginAsGuest = () => {
+    SignInGuest().then((response) => {
+      if (response === "OK") {
+        global.isGuest = true;
+        router.replace("/home");
       } else {
-        const response = await axios.post(
-          "http://192.168.0.18:3000/api/users/register-guest"
-        );
-        if (response.status === 200) {
-          await AsyncStorage.setItem("guest-accessToken", response.data);
-          console.log("Register guest correcto");
-        }
+        SignUpGuest().then((response) => {
+          if (response === "OK") {
+            global.isGuest = true;
+            router.replace("/home");
+          } else {
+            Alert.alert(
+              "Error",
+              "Ha ocurrido un error inesperado. Intente de nuevo más tarde."
+            );
+          }
+        });
       }
-    } catch (error) {
-      console.log("\x1b[41m%s\x1b[0m", "ERROR: " + error);
-    }
+    });
   };
 
   return (
